@@ -1,0 +1,41 @@
+require "test_helper"
+<% module_namespacing do -%>
+class <%= class_name %>Test < ActiveSupport::TestCase
+  setup do
+    @data = <%= table_name %>(:one).as_json.except 'id'
+  end
+
+  test 'should create <%= singular_table_name %>' do
+    <%= singular_table_name %> = <%= class_name %>.new @data
+    assert <%= singular_table_name %>.save, "Failed to create a new <%= singular_table_name %>: #{<%= singular_table_name %>.errors.as_json}"
+  end
+
+  test 'should not create <%= singular_table_name %> with missing fields' do
+    %w[<%= attributes&.map(&:name).join(' ') %>].each do |field|
+      <%= singular_table_name %> = <%= class_name %>.new @data.except field
+      assert_not <%= singular_table_name %>.save, "Not null validation failed for field #{field}"
+    end
+  end
+
+  test 'should update <%= singular_table_name %>' do
+    <%= singular_table_name %> = <%= table_name %>(:one)
+<%- if attributes.count.positive? %>
+    <%= singular_table_name %>.<%= attributes[0].name %> = 'Modified'
+<% end -%>
+    assert <%= singular_table_name %>.save, 'Failed to update <%= singular_table_name %>'
+  end
+
+  test 'should not update <%= singular_table_name %> with missing fields' do
+    %w[<%= attributes&.map(&:name).join(' ') %>].each do |field|
+      <%= singular_table_name %> = <%= table_name %>(:one)
+      <%= singular_table_name %>.send("#{field}=", nil)
+      assert_not <%= singular_table_name %>.save, "Not null validation failed for field #{field}"
+    end
+  end
+
+  test 'should delete <%= singular_table_name %>' do
+    <%= singular_table_name %> = <%= table_name %>(:deletable)
+    assert <%= singular_table_name %>.destroy, 'Failed to delete <%= singular_table_name %>'
+  end
+end
+<% end -%>

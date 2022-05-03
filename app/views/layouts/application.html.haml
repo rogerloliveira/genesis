@@ -1,0 +1,38 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title= content_for?(:title) ? yield(:title) : 'Genesis'
+    %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = javascript_include_tag "application", "data-turbo-track": "reload", defer: true
+  %body
+    %header#header
+      = link_to root_path, id: 'logo', class: 'no-underscore' do
+        %strong Genesis
+      %nav#main-menu
+        = link_to t('menu.home'), root_path
+        = link_to t('menu.home'), root_path
+        = link_to t('menu.home'), root_path
+        = link_to t('menu.home'), root_path
+    #messages
+      - flash.each do |type, message|
+        %text-box{ class: type }= message
+    - if content_for? :breadcrumbs
+      #breadcrumbs
+        = link_to t(:home), root_path
+        >
+        = yield :breadcrumbs
+    - if content_for? :actions
+      #actions.area-container= yield :actions
+    - if content_for? :left_column
+      #left-column.area-container.vertical= yield :left_column
+    %main#content= yield
+    - if content_for? :right_column
+      #right-column.area-container.vertical= yield :right_column
+    %footer#footer
+      = "#{Date.today.year} - Genesis"
+      - if content_for? :footer
+        = yield :footer

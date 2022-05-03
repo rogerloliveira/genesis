@@ -1,0 +1,65 @@
+body {
+  max-height: 100%;
+  display: grid;
+  grid-template-columns: min-content 1fr min-content;
+  grid-template-rows: min-content min-content min-content min-content 1fr min-content;
+  grid-template-areas: "header header header" "breadcrumbs breadcrumbs breadcrumbs" "messages messages messages" "actions actions actions" "left-column content right-column" "footer footer footer";
+}
+
+@include grid-areas((header breadcrumbs messages actions left-column content right-column footer));
+
+#left-column, #right-column {
+  display: inline-block;
+  width: $column-width;
+}
+
+#content {
+  overflow-y: auto;
+}
+
+@include for-desktops-up {
+  .container {
+    @for $i from 1 through 12 {
+      .col-lg-#{$i} {
+        grid-column: span $i;
+      }
+    }
+  }
+  .lg-hidden {
+    display: none !important;
+  }
+}
+
+@include for-tablets-up {
+  .container {
+    @for $i from 1 through 12 {
+      .col-md-#{$i} {
+        grid-column: span $i;
+      }
+    }
+
+    &.centered {
+      width: 100% !important;
+    }
+  }
+  .md-hidden {
+    display: none !important;
+  }
+}
+
+@include for-phones-only {
+  .container {
+    @for $i from 1 through 12 {
+      .col-sm-#{$i} {
+        grid-column: span $i;
+      }
+    }
+
+    &.centered {
+      width: 100% !important;
+    }
+  }
+  .sm-hidden {
+    display: none !important;
+  }
+}

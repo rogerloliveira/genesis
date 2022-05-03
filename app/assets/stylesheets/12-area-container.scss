@@ -1,0 +1,14 @@
+.area-container {
+  display: grid;
+  grid-template-columns: min-content 1fr min-content;
+  grid-template-rows: 100%;
+  grid-template-areas: "left center right";
+
+  &.vertical {
+    grid-template-columns: 100%;
+    grid-template-rows: min-content 1fr min-content;
+    grid-template-areas: "top" "middle" "bottom";
+  }
+
+  @include grid-areas((left center right top middle bottom), true);
+}

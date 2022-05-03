@@ -1,0 +1,82 @@
+.container {
+  margin: auto;
+
+  &.fluid {
+    width: 100%;
+  }
+
+  &.fixed-width {
+    width: $content-width;
+  }
+
+  &.grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: min-content;
+
+    @for $i from 1 through 12 {
+      .col-#{$i} {
+        grid-column: span $i;
+      }
+    }
+
+    @for $i from 0 through 16 {
+      &.gap-#{$i} {
+        grid-gap: $i * .25rem;
+      }
+      &.row-gap-#{$i} {
+        grid-row-gap: $i * .25rem;
+      }
+      &.column-gap-#{$i} {
+        grid-column-gap: $i * .25rem;
+      }
+    }
+  }
+
+  &.flex {
+    display: flex;
+
+    &.row {
+      flex-direction: row;
+
+      &.reverse {
+        flex-direction: row-reverse;
+      }
+    }
+
+    &.column {
+      flex-direction: column;
+
+      &.reverse {
+        flex-direction: column-reverse;
+      }
+    }
+
+    &.no-wrap {
+      flex-wrap: nowrap;
+    }
+
+    &.wrap {
+      flex-wrap: wrap;
+    }
+
+    @each $position in (start end center) {
+      &.#{$position} {
+        align-items: $position;
+        align-content: $position;
+      }
+      &.justify-#{$position} {
+        justify-items: $position;
+        justify-content: $position;
+      }
+    }
+    @each $position in (stretch space-around space-between space-evenly) {
+      &.#{$position} {
+        align-content: $position;
+      }
+      &.justify-#{$position} {
+        justify-content: $position;
+      }
+    }
+  }
+}

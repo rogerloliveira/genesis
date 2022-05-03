@@ -1,0 +1,19 @@
+@include property-variants(text-align, ta, (l left, c center, r right));
+@include property-variants(vertical-align, va, (t top, m middle, b bottom));
+@include property-variants(display, disp, (none hidden, rel relative, abs absolute, inblock inline-block, inline inline));
+@include side-variants(margin, m, "", .25rem);
+@include side-variants(padding, p, "", .25rem);
+@include side-variants(border, b, "", 1px, "#{$default-border-color} solid");
+@include font-sizes("");
+
+.no-border {
+  border: 0 !important;
+}
+
+.no-margin {
+  margin: 0 !important;
+}
+
+.no-padding {
+  padding: 0 !important;
+}

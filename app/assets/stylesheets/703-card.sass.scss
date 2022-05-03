@@ -1,0 +1,53 @@
+div.card {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-grid;
+  grid-template-columns: 100%;
+  grid-template-rows: min-content 1fr min-content;
+  grid-template-areas: 'header' 'content' 'footer';
+  box-shadow: 2px 2px 5px $card-header-background-color;
+
+  h2 {
+    grid-area: header;
+    color: $card-header-foreground-color;
+    background: $card-header-background-color;
+    margin: 0;
+    padding: .25rem;
+    text-align: center;
+    border-bottom: 1px solid $card-border-color;
+    border-top-left-radius: .25em;
+    border-top-right-radius: .25em;
+    @extend .default-text-shadow;
+  }
+
+
+  > div {
+    border-left: 1px solid $card-border-color;
+    border-right: 1px solid $card-border-color;
+
+    &:last-child {
+      border-bottom: 1px solid $card-border-color;
+    }
+  }
+
+  @each $color-name, $colors in $theme-colors {
+    &.#{$color-name} {
+      h2 {
+        @include genesis-gradient(nth($colors, 1), nth($colors, 2), 10px, -10)
+      }
+
+      div {
+        border-color: nth($colors, 1);
+      }
+    }
+  }
+
+  .footer {
+    grid-area: footer;
+    @include background-variants($theme-colors, 0, 0, 0, 0.2);
+
+  }
+
+
+  @include grid-areas((content));
+}
