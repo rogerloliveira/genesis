@@ -72,8 +72,14 @@ $debug: false !default;
 // Layout
 $content-width: 1600px;
 $column-width: 250px;
+$default-padding: .5rem;
 
 // Theme
+// Header
+$header-background-color: #331f1b;
+$header-color: #f8b700;
+$breadcrumbs-background: darken($header-background-color, 2);
+
 $highlight-color: #f8b700;
 $foreground-color: #cccccc;
 $foreground-color-highlight: #fff9c4;
