@@ -1,3 +1,5 @@
+@use "010-config" as config;
+
 table.responsive {
   table-layout: fixed;
   border-collapse: collapse;
@@ -10,7 +12,7 @@ table.responsive {
     tbody {
       tr:nth-child(odd) {
         td, th {
-          background: $table-stripped-odd-row-background;
+          background: config.$table-stripped-odd-row-background;
         }
       }
     }
@@ -20,21 +22,21 @@ table.responsive {
     tbody {
       tr:hover {
         th, td {
-          background: $table-selectable-hover-background-color;
+          background: config.$table-selectable-hover-background-color;
         }
       }
     }
   }
 
   &.bordered {
-    border: $table-bordered-border-color 3px solid;
+    border: config.$table-bordered-border-color 3px solid;
   }
 
   &.bordered-rows {
     thead {
       tr {
         th, td {
-          border-bottom: $table-bordered-rows-border-color 2px solid;
+          border-bottom: config.$table-bordered-rows-border-color 2px solid;
         }
       }
     }
@@ -42,7 +44,7 @@ table.responsive {
     tbody {
       tr:not(:first-of-type) {
         th, td {
-          border-top: $table-bordered-rows-border-color 1px dashed;
+          border-top: config.$table-bordered-rows-border-color 1px dashed;
         }
       }
     }
@@ -51,7 +53,7 @@ table.responsive {
   &.bordered-columns {
     tbody, thead {
       tr th:not(:last-child), tr td:not(:last-child) {
-        border-right: $table-bordered-columns-border-color 2px solid;
+        border-right: config.$table-bordered-columns-border-color 2px solid;
       }
     }
   }

@@ -1,6 +1,6 @@
+# frozen_string_literal: true
+
+# SpecialPages controller class
 class SpecialPagesController < ApplicationController
-  def home
-    flash[:danger] = 'Danger message'
-    flash[:warning] = 'Warning message'
-  end
+  def home; end
 end

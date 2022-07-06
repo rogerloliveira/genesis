@@ -1,0 +1,13 @@
+@use "020-mixins" as mixins;
+
+// display
+@include mixins.responsive-breakpoints(hidden) { display: none !important; }
+@include mixins.responsive-breakpoints(block) { display: block !important; }
+@include mixins.responsive-breakpoints(inline-block) { display: inline-block !important; }
+@include mixins.responsive-breakpoints(inline) { display: inline !important; }
+
+// position
+@include mixins.property-variants(text-align, ta, (l left, c center, r right));
+@include mixins.property-variants(vertical-align, va, (t top, m middle, b bottom));
+@include mixins.property-variants(position, p, (rel relative, abs absolute, sta static));
+

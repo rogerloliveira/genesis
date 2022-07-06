@@ -1,0 +1,17 @@
+@use "010-config" as config;
+
+body {
+  font-family: config.$text-font;
+}
+
+a, a:link {
+  color: config.$link-color;
+}
+
+a:visited {
+  color: config.$link-color-visited;
+}
+
+a:active {
+  color: config.$link-color-active;
+}

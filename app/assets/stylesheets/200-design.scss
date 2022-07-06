@@ -1,0 +1,67 @@
+@use "010-config" as config;
+@use "020-mixins" as mixins;
+
+body {
+  background: config.$background;
+  color: config.$foreground;
+}
+
+@if config.$header-enable {
+  #header {
+    background: config.$header-background;
+    color: config.$header-foreground;
+    border-bottom: config.$header-border-bottom;
+    padding: config.$header-padding;
+  }
+}
+
+@if config.$main-menu-enable {
+  #main-menu {
+    a {
+      font-size: 2rem;
+      text-decoration: none;
+      background: config.$main-menu-background;
+      padding: config.$main-menu-padding;
+
+      &:hover {
+        background: config.$main-menu-hover-background;
+      }
+    }
+  }
+}
+
+@if config.$breadcrumbs-enable {
+  #breadcrumbs {
+    background: config.$breadcrumbs-background;
+    color: config.$breadcrumbs-foreground;
+    border-bottom: config.$breadcrumbs-border-bottom;
+    padding: config.$breadcrumbs-padding;
+  }
+}
+
+@if config.$left-column-enable {
+  #left {
+    background: config.$left-column-background;
+    color: config.$left-column-foreground;
+    border-right: config.$left-column-border-right;
+    padding: config.$left-column-padding;
+  }
+}
+
+@if config.$right-column-enable {
+  #right {
+    background: config.$right-column-background;
+    color: config.$right-column-foreground;
+    border-left: config.$right-column-border-left;
+    padding: config.$right-column-padding;
+  }
+}
+
+@if config.$footer-enable {
+  #footer {
+    background: config.$footer-background;
+    color: config.$footer-foreground;
+    border-top: config.$footer-border-top;
+    padding: config.$footer-padding;
+  }
+}

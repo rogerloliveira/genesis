@@ -1,0 +1,111 @@
+@use "010-config" as config;
+@use "101-container" as container;
+
+form {
+  @extend .container;
+}
+
+.field {
+  display: grid;
+  grid-template-columns: min-content 1fr min-content;
+  grid-template-rows: min-content min-content min-content;
+  grid-template-areas: "label label label" "input input input" "details . error";
+  grid-gap: .25rem;
+
+  label {
+    grid-area: label;
+  }
+
+  small {
+    grid-area: details;
+    white-space: nowrap;
+  }
+
+  i {
+    grid-area: error;
+    white-space: nowrap;
+    color: config.$danger;
+  }
+
+  &.hidden {
+    display: none;
+  }
+}
+
+.check-control {
+  display: inline-grid;
+  grid-template-columns: min-content 1fr;
+  grid-template-rows: 1.5em 2fr;
+  grid-template-areas: ". ." "input label";
+
+  label { grid-area: label }
+  input { grid-area: input; }
+
+  &.inline {
+    grid-template-rows: 2fr;
+    grid-template-areas: "input label";
+  }
+}
+
+.form-input {
+  grid-area: input;
+  background: config.$input-background;
+  border: none;
+  border-bottom: config.$input-border-color 2px solid;
+  padding: .25rem;
+  font-size: 14pt;
+  color: config.$foreground;
+
+  &.error {
+    background: config.$input-background-color-error;
+  }
+
+  &:focus {
+    border-bottom: config.$input-border-focus 2px solid;
+    transition: border-bottom-color ease-in 0.1s;
+
+    &.error {
+      border-bottom: config.$danger 2px solid;
+    }
+  }
+}
+
+input {
+  @extend .form-input;
+}
+
+select {
+  @extend .form-input;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: url('data:image/svg+xml;plain,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" fill="rgba(0,0,0,.8)"/></svg>') right center no-repeat;
+}
+
+label[data-required] {
+  &:after {
+    content: '*';
+    color: config.$highlight;
+  }
+}
+
+textarea {
+  @extend .form-input;
+  resize: vertical;
+}
+
+fieldset {
+  border: solid 1px config.$fieldset-border-color;
+  border-radius: .25rem;
+  margin: 0;
+  padding: .5rem;
+
+  legend {
+    padding: 0 .5rem;
+  }
+}
+
+.actions {
+  grid-column: span 12;
+}
+

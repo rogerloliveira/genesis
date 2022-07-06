@@ -22,6 +22,9 @@
 !/tmp/pids/
 !/tmp/pids/.keep
 
+# Database schemas
+db/schema.rb
+
 # Ignore uploaded files in development.
 /storage/*
 !/storage/.keep
@@ -33,6 +36,7 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+.env
 
 /app/assets/builds/*
 !/app/assets/builds/.keep

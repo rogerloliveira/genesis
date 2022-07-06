@@ -1,0 +1,6 @@
+@use "010-config" as config;
+@use "020-mixins" as mixins;
+
+.box {
+  @include mixins.background-variants(config.$theme-colors);
+}

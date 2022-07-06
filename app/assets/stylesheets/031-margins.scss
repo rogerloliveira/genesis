@@ -1,0 +1,5 @@
+@use "010-config" as config;
+@use "020-mixins" as mixins;
+
+@include mixins.size-variants(margin, m, .25rem, true, true, true);
+@include mixins.size-variants(padding, p, .25rem, true, true, true);

@@ -1,0 +1,201 @@
+@use "010-config" as config;
+
+@mixin for-phones-only() {
+  @media (max-width: config.$responsive-sm-breakpoint) {
+    @content;
+  }
+}
+
+@mixin for-tablets-up() {
+  @media (min-width: config.$responsive-sm-breakpoint + 1px) and (max-width: config.$responsive-lg-breakpoint - 1px) {
+    @content;
+  }
+}
+
+@mixin for-desktops-up {
+  @media (min-width: config.$responsive-lg-breakpoint) {
+    @content;
+  }
+}
+
+@mixin background-variants($color-map, $brightness: 0, $hover-brightness: 0, $border-brightness: -10, $transparency: -.4, $includeDisable: false) {
+  background-origin: border-box;
+
+  @each $name, $colors in $color-map {
+    &.#{$name} {
+      $color: nth($colors, 1);
+
+      background-color: adjust-color($color, $lightness: $brightness, $alpha: $transparency);
+      color: nth($colors, 2);
+
+      @if $border-brightness != 0 {
+        border: 1px solid adjust-color($color, $lightness: $border-brightness, $alpha: $transparency);
+      }
+
+      @if $hover-brightness != 0 {
+        &:hover {
+          background-color: adjust-color($color, $lightness: $hover-brightness, $alpha: $transparency);
+        }
+      }
+
+      @if $includeDisable {
+        &:disabled {
+          opacity: .4;
+        }
+      }
+    }
+  }
+}
+
+@mixin color-variants($color-map, $brightness: 0, $hover-brightness: 0) {
+  @each $name, $colors in $color-map {
+    &.text-#{$name} {
+      $color: nth($colors, 1);
+      color: adjust-color($color, $lightness: $brightness);
+
+      @if $hover-brightness != 0 {
+        &:hover {
+          background: adjust-color($color, $lightness: $hover-brightness);
+        }
+      }
+    }
+  }
+}
+
+@mixin grid-area($names...) {
+  @each $name in $names {
+    ##{$name} {
+      grid-area: $name;
+    }
+  }
+}
+
+@mixin responsive-breakpoints($class: "", $include-base-class: true) {
+  @if $class != "" {
+    @include for-phones-only() { .sm-#{$class} { @content; } }
+    @include for-tablets-up() { .md-#{$class} { @content; } }
+    @include for-desktops-up() { .lg-#{$class} { @content; } }
+    @if $include-base-class {
+      @include for-desktops-up() { .#{$class} { @content; } }
+    }
+  } @else {
+    @include for-phones-only() { @content("sm-"); }
+    @include for-tablets-up() { @content("md-"); }
+    @include for-desktops-up() { @content("lg-"); }
+    @if $include-base-class {
+      @content("");
+    }
+  }
+}
+
+$measurements: (w width, h height, min-w min-width, min-h min-height, max-w max-width, max-h max-height);
+$side-variants: ("" "", b "-bottom", t "-top", r "-right", l "-left");
+
+@mixin sizes($class, $property, $breakpoint, $measurement) {
+  $i: 5;
+  @while $i <= 100 {
+    .#{$class}#{$breakpoint}-#{$i} {
+      #{$property}: $i * $measurement;
+    }
+    $i: $i + 5;
+  }
+}
+
+@mixin size-variants($property, $alias, $factor, $sides: false, $responsive: false, $include-base-class: false, $extras: "") {
+  @for $multiplier from 1 through 16 {
+    @if $responsive {
+      @include responsive-breakpoints($include-base-class: $include-base-class) using ($prefix) {
+        @if $sides {
+          @each $suffix, $modifier in $side-variants {
+            .#{$prefix}#{$alias}#{$suffix}-#{$multiplier} {
+              #{$property}#{$modifier}: $multiplier * $factor #{$extras} !important;
+            }
+          }
+          .#{$prefix}#{$alias}h-#{$multiplier} {
+            #{$property}-left: $multiplier * $factor #{$extras} !important;
+            #{$property}-right: $multiplier * $factor #{$extras} !important;
+          }
+          .#{$prefix}#{$alias}v-#{$multiplier} {
+            #{$property}-top: $multiplier * $factor #{$extras} !important;
+            #{$property}-bottom: $multiplier * $factor #{$extras} !important;
+          }
+        } @else {
+          .#{$prefix}#{$alias}-#{$multiplier} { $property: $multiplier * $factor #{$extras} !important; }
+        }
+      }
+    } @else {
+      @if $sides {
+        @each $suffix, $modifier in $side-variants {
+          .#{$alias}#{$suffix}-#{$multiplier} {
+            #{$property}#{$modifier}: $multiplier * $factor #{$extras} !important;
+          }
+        }
+        .#{$alias}h-#{$multiplier} {
+          #{$property}-left: $multiplier * $factor #{$extras} !important;
+          #{$property}-right: $multiplier * $factor #{$extras} !important;
+        }
+        .#{$alias}v-#{$multiplier} {
+          #{$property}-top: $multiplier * $factor #{$extras} !important;
+          #{$property}-bottom: $multiplier * $factor #{$extras} !important;
+        }
+      } @else {
+        .#{$alias}-#{$multiplier} { $property: $multiplier * $factor #{$extras} !important; }
+      }
+    }
+  }
+}
+
+@mixin property-variants($property, $alias, $variants, $responsive: false, $include-base-class: false) {
+  @if $responsive {
+    @include responsive-breakpoints($include-base-class: $include-base-class) using ($prefix) {
+      @each $suffix, $value in $variants {
+        .#{$prefix}#{$alias}-#{$suffix} {
+          #{$property}: $value !important;
+        }
+      }
+    }
+  } @else {
+    @each $suffix, $value in $variants {
+      .#{$alias}-#{$suffix} {
+        #{$property}: $value !important;
+      }
+    }
+  }
+}
+
+@mixin property-range($property, $alias, $min, $max, $responsive: false, $include-base-class: false) {
+  @if $responsive {
+    @for $i from $min through $max {
+      @include responsive-breakpoints($include-base-class: $include-base-class) using ($prefix) {
+        .#{$prefix}#{$alias}-#{$i} { @content($i); }
+      }
+    }
+  } @else {
+    @for $i from $min through $max {
+      .#{$alias}-#{$i} {
+        @content($i);
+      }
+    }
+  }
+}
+
+@mixin font-sizes($breakpoint) {
+  @for $i from 1 through 3 {
+    .small#{$breakpoint}-#{$i} {
+      font-size: 1rem - ($i * .25rem);
+    }
+  }
+
+  @for $i from 1 through 12 {
+    .large#{$breakpoint}-#{$i} {
+      font-size: 1rem + ($i * .25rem);
+    }
+  }
+}
+
+@mixin genesis-gradient($background-color, $color, $gradient-breakpoint: 10px, $brightness: 0){
+  $background-color: adjust-color($color, $lightness: $brightness);
+  background: linear-gradient(0, lighten($background-color, 20), $background-color $gradient-breakpoint, lighten($background-color, 20));
+  border-bottom: 1px solid $background-color;
+  color: $color;
+}

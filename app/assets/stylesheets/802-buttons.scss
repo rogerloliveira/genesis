@@ -1,3 +1,6 @@
+@use "010-config" as config;
+@use "020-mixins" as mixins;
+
 .button-appearance {
   display: inline-block;
   cursor: pointer;
@@ -7,6 +10,7 @@
   white-space: nowrap;
   padding: .5rem 1rem;
   border-radius: 1rem;
+  @include mixins.background-variants(config.$theme-colors, 0, 10, 10, .2, true);
 
   &.small {
     padding: .2rem .4rem;
@@ -14,16 +18,14 @@
 
   &[data-icon]:before {
     content: attr(data-icon);
-    font-family: $icon-font;
+    font-family: config.$icon-font;
   }
 }
 
 button, input[type=button], input[type=reset], input[type=submit] {
   @extend .button-appearance;
-  @include background-variants($theme-colors, 0, -5, -10, 0);
-  @include outline-variants($theme-colors, 1, -10);
-  background: $button-background-color;
-  border: 1px solid $default-border-color;
+  @include mixins.background-variants(config.$theme-colors, 0, -5, -10, 0);
+  border: 1px solid config.$default-border-color;
 
   &.glow {
     box-shadow: inset 1px 1px 1px rgba(255, 255, 255, 0.5), inset -1px -1px 1px rgba(0, 0, 0, 0.5);
@@ -32,9 +34,8 @@ button, input[type=button], input[type=reset], input[type=submit] {
 
 a.button {
   @extend .button-appearance;
-  @include background-variants($theme-colors, 0, -5, -10, 0);
-  @include color-variants($theme-colors, 0, 0);
-  @include outline-variants($theme-colors, 1, -10);
+  @include mixins.background-variants(config.$theme-colors, 0, -5, -10, 0);
+  @include mixins.color-variants(config.$theme-colors, 0, 0);
   text-decoration: none !important;
 }
 

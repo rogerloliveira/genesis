@@ -1,36 +1,26 @@
+@use "010-config" as config;
+@use "020-mixins" as mixins;
+
 .container {
   margin: auto;
 
-  &.fluid {
-    width: 100%;
-  }
+  &.fluid { width: 100%; }
 
-  &.fixed-width {
-    width: $content-width;
-  }
+  &.fixed-width { width: config.$content-width; }
 
   &.grid {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-auto-rows: min-content;
-
-    @for $i from 1 through 12 {
-      .col-#{$i} {
-        grid-column: span $i;
-      }
+    @for $i from 2 through 11 {
+      &.grid-#{$i} { grid-template-columns: repeat($i, 1fr); }
     }
 
-    @for $i from 0 through 16 {
-      &.gap-#{$i} {
-        grid-gap: $i * .25rem;
-      }
-      &.row-gap-#{$i} {
-        grid-row-gap: $i * .25rem;
-      }
-      &.column-gap-#{$i} {
-        grid-column-gap: $i * .25rem;
-      }
-    }
+    @include mixins.property-range(grid-column, col, 1, 12, true, true) using ($i) { grid-column: span $i; }
+
+    @include mixins.size-variants(grid-gap, gap, .25rem, false, true, true);
+    @include mixins.size-variants(grid-row-gap, row-gap, .25rem, false, true, true);
+    @include mixins.size-variants(grid-column-gap, col-gap, .25rem, false, true, true);
   }
 
   &.flex {

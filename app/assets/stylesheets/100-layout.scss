@@ -1,0 +1,72 @@
+@use "010-config" as config;
+@use "020-mixins" as mixins;
+@use "sass:math";
+
+body {
+  display: grid;
+  grid-template-columns: min-content 1fr min-content;
+  grid-template-rows: min-content min-content min-content 1fr min-content;
+  grid-template-areas: "header header header" "breadcrumbs breadcrumbs breadcrumbs" "messages messages messages" "left content right" "footer footer footer";
+}
+
+@include mixins.grid-area(header, breadcrumbs, messages, left, content, right, footer);
+
+#header {
+  display: grid;
+  grid-template-columns: min-content 1fr min-content;
+  grid-template-rows: auto;
+  grid-template-areas: "logo main-menu profile";
+  align-items: end;
+}
+
+@include mixins.grid-area(btn-left, logo, btn-right, main-menu, profile);
+
+#logo {
+  display: inline-block;
+  height: config.$logo-height;
+}
+
+#main-menu {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+#left, #right {
+  display: inline-block;
+  width: config.$column-width;
+  background: rgba(255, 0, 0, .2);
+}
+
+@include mixins.for-phones-only() {
+  body {
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content min-content min-content 1fr min-content;
+    grid-template-areas: "header" "breadcrumbs" "messages" "content" "footer";
+  }
+
+  #logo {
+    height: math.div(config.$logo-height, 2);
+  }
+
+  #header {
+    grid-template-columns: min-content 1fr min-content;
+    grid-template-rows: min-content 1fr min-content;
+    grid-template-areas: "btn-left logo btn-right" "main-menu main-menu main-menu" "profile profile profile";
+    align-items: start;
+    justify-items: center;
+  }
+
+  #main-menu {
+    width: 100%;
+    flex-flow: column nowrap;
+  }
+
+  #left, #right {
+    position: absolute;
+    top: 2rem;
+    bottom: 0;
+    height: 100%;
+  }
+  #left { left: 0; }
+  #right { right: 0; }
+}

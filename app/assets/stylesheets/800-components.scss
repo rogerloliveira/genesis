@@ -1,0 +1,11 @@
+@use "010-config" as config;
+@use "020-mixins" as mixins;
+
+toggle-button[icon]:before {
+  content: attr(icon);
+  font-family: config.$icon-font;
+}
+
+text-box {
+  @include mixins.background-variants(config.$theme-colors, 0, 0, 10, 0.2);
+}

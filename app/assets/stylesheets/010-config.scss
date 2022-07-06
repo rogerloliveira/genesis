@@ -1,0 +1,115 @@
+/* Responsive breakpoints */
+$column-width: 400px !default;
+$responsive-sm-breakpoint: 599px !default;
+$responsive-lg-breakpoint: 1200px !default;
+$content-width: 1200px;
+
+/* Colors */
+$white: #fff;
+$primary: #007bff;
+$secondary: #999999;
+$success: #28a745;
+$info: #17a2b8;
+$notice: #17a2b8;
+$warning: #ffc107;
+$danger: #dc3545;
+$alert: #dc3545;
+$special: rebeccapurple;
+
+$theme-colors: (
+  primary: ($primary, $white),
+  secondary: ($secondary, $white),
+  success: ($success, $white),
+  info: ($info, $white),
+  notice: ($notice, $white),
+  warning: ($warning, $white),
+  danger: ($danger, $white),
+  alert: ($alert, $white),
+  special: ($special, $white)
+);
+
+/* Design */
+$background: #d4d4d4 !default;
+$foreground: #333333 !default;
+$highlight: #dcac0b !default;
+
+/* Layout & Design */
+$default-padding: .5rem !default;
+$default-border-color: #999 !default;
+$default-border: solid 1px $default-border-color !default;
+$default-outline-color: $highlight !default;
+$default-outline: solid 1px $default-outline-color !default;
+
+$text-font-url: 'https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap';
+$text-font: 'Roboto';
+$icon-font-url: 'https://fonts.googleapis.com/icon?family=Material+Icons&display=swap';
+$icon-font: 'Material Icons';
+
+$header-enable: true !default;
+$header-background: #c9c9c9 !default;
+$header-foreground: $foreground !default;
+$header-border-bottom: $default-border !default;
+$header-padding: $default-padding !default;
+
+$logo-height: 100px;
+
+$main-menu-enable: true !default;
+$main-menu-background: darken($header-background, 10) !default;
+$main-menu-hover-background: darken($header-background, 15) !default;
+$main-menu-padding: $default-padding !default;
+
+$breadcrumbs-enable: true !default;
+$breadcrumbs-background: $header-background !default;
+$breadcrumbs-foreground: $header-foreground !default;
+$breadcrumbs-border-bottom: $header-border-bottom !default;
+$breadcrumbs-padding: $default-padding !default;
+
+$left-column-enable: true !default;
+$left-column-background: $background !default;
+$left-column-foreground: $foreground !default;
+$left-column-border-right: $default-border !default;
+$left-column-padding: $default-padding !default;
+
+$right-column-enable: true !default;
+$right-column-background: $background !default;
+$right-column-foreground: $foreground !default;
+$right-column-border-left: $default-border !default;
+$right-column-padding: $default-padding !default;
+
+$footer-enable: true !default;
+$footer-background: $background !default;
+$footer-foreground: $foreground !default;
+$footer-border-top: $default-border !default;
+$footer-padding: $default-padding !default;
+
+/* Typography */
+$link-color: $highlight !default;
+$link-color-visited: darken($link-color, 10);
+$link-color-active: lighten($link-color, 10);
+@import url(#{$text-font-url});
+@import url(#{$icon-font-url});
+
+/* Components */
+/* Card */
+$card-background: $white;
+$card-foreground: #444;
+$card-header-background-color: #ececec;
+$card-header-foreground-color: #444;
+$card-border-color: darken($card-header-background-color, 10%);
+
+/* Form Controls */
+$fieldset-border-color: lighten($background, 15);
+$input-background: lighten($background, 20);
+$input-border-color: transparent;
+$input-background-focus: lighten($background, 20);
+$input-border-focus: $background;
+$form-background-color: lighten($background, 10);
+$input-background-color: lighten($background, 20);
+$input-background-color-error: transparentize($danger, 0.5);
+
+/* Table */
+$table-stripped-odd-row-background: #6c757d;
+$table-selectable-hover-background-color: #17a2b8;
+$table-bordered-border-color: #000000;
+$table-bordered-rows-border-color: #000000;
+$table-bordered-columns-border-color: #730E15;

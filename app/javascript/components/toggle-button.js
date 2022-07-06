@@ -4,14 +4,10 @@ class ToggleButton extends HTMLElement {
     const shadowRoot = this.attachShadow( { mode: 'open' });
     shadowRoot.innerHTML = '<slot></slot>';
   }
+
   connectedCallback() {
     this.mode = this.getAttribute('mode');
-    if (!this.hasAttribute('target-display-class')) {
-      this.setAttribute('target-display-class', 'inline-block');
-    }
-    if (!this.hasAttribute('target-display-hidden-class')) {
-      this.setAttribute('target-display-hidden-class', 'none');
-    }
+
     if (this.mode === 'copy') {
       this.addEventListener('click', this.copy.bind(this));
     } else {
@@ -20,16 +16,20 @@ class ToggleButton extends HTMLElement {
   }
 
   target() {
-    return document.getElementById(this.getAttribute('target'));
+    if (!this._target) {
+      this._target = document.getElementById(this.getAttribute('target'));
+    }
+
+    return this._target;
   }
 
   render() {
     if (this.state) {
       this.classList.add(this.pressedClass);
-      this.target().style.display = this.targetDisplayClass;
+      this.target().classList.remove(this.hiddenClass);
     } else {
       this.classList.remove(this.pressedClass);
-      this.target().style.display = this.targetDisplayHiddenClass;
+      this.target().classList.add(this.hiddenClass);
     }
   }
 
@@ -56,15 +56,11 @@ class ToggleButton extends HTMLElement {
   }
 
   get pressedClass() {
-    return this.getAttribute('pressedClass');
+    return this.getAttribute('pressed-class');
   }
 
-  get targetDisplayClass() {
-    return this.getAttribute('target-display-class');
-  }
-
-  get targetDisplayHiddenClass() {
-    return this.getAttribute('target-display-hidden-class');
+  get hiddenClass() {
+    return this.getAttribute('hidden-class');
   }
 }
 customElements.define('toggle-button', ToggleButton);

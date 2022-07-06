@@ -1,0 +1,5 @@
+@use "010-config" as config;
+@use "020-mixins" as mixins;
+
+@include mixins.size-variants(outline-width, o, 1px, true, true, true);
+@include mixins.size-variants(border-width, b, 1px, true, true, true);

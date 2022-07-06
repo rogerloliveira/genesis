@@ -1,9 +1,0 @@
-@function color-brightness($color, $delta) {
-  @if ($delta > 0) {
-    @return lighten($color, $delta)
-  } @else if($delta < 0) {
-    @return darken($color, $delta * -1)
-  } @else {
-    @return $color;
-  }
-}

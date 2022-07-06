@@ -1,7 +1,18 @@
-@import '00-reset.sass.scss';
-@import '01-config.sass.scss';
-@import '02-functions.sass.scss';
-@import '03-mixins.sass.scss';
-@import '04-consts.sass.scss';
-@import '10-layout.scss';
-@import '12-area-container';
+@forward "010-config";
+
+@use "000-reset" as reset;
+@use "020-mixins" as mixins;
+@use "030-consts" as consts;
+@use "031-margins" as margins;
+@use "100-layout" as layout;
+@use "101-container" as container;
+@use "200-design" as design;
+@use "201-box" as box;
+@use "202-borders" as borders;
+@use "300-typography" as typography;
+@use "800-components" as components;
+@use "801-card" as card;
+@use "802-buttons" as buttons;
+@use "803-form-controls" as form-controls;
+@use "804-table" as table;
+
