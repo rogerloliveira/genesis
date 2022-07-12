@@ -19,6 +19,7 @@ module Genesis
     config.i18n.default_locale = :'en-us'
     config.i18n.fallbacks = true
     routes.default_url_options[:locale] = :'en-us'
+    config.i18n.enforce_available_locales = false
 
     # Generators
     config.generators do |generate|

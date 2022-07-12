@@ -2,6 +2,11 @@
 
 # Application controller
 class ApplicationController < ActionController::Base
+  before_action :authenticate_user!
+  before_action :set_locale
+
+  default_form_builder GenesisFormBuilder
+
   rescue_from ActionController::RoutingError, with: :render_not_found
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 

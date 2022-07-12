@@ -1,27 +1,24 @@
 !!!
 %html
   %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title Genesis
-    %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
+    %meta{ content: 'text/html;charset=UTF-8', 'http-equiv': 'Content-Type' }/
+    %title= content_for?(:title) ? yield(:title) : 'Genesis'
+    %meta{ content: 'width=device-width,initial-scale=1', name: 'viewport' }/
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_link_tag "application", "data-turbo-track": "reload"
-    = javascript_include_tag "application", "data-turbo-track": "reload", defer: true
+    = stylesheet_link_tag 'application', 'data-turbo-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbo-track': 'reload', defer: true
   %body
     %header#header
       - if content_for? :left
-        %toggle-button#btn-left.md-hidden{ target: 'left', mode: :toggle, 'hidden-class': 'sm-hidden', icon: :menu }
+        %toggle-button.md-hidden#btn-left{ target: 'left', mode: :toggle, 'hidden-class': 'sm-hidden', icon: :menu }
       = link_to root_url do
         = image_tag 'logo.svg', id: :logo
       - if content_for? :right
-        %toggle-button#btn-right.md-hidden{ target: 'right', mode: :toggle, 'hidden-class': 'sm-hidden', icon: :menu }
+        %toggle-button.md-hidden#btn-right{ target: 'right', mode: :toggle, 'hidden-class': 'sm-hidden', icon: :menu }
       %nav#main-menu
-        = link_to t(:home), root_url
-        = link_to 'Link 1', root_url
-        = link_to 'Link 2', root_url
+        = render 'layouts/navigation'
       #profile
-
 
     - if content_for? :breadcrumbs
       %nav#breadcrumbs
@@ -29,9 +26,12 @@
         >
         = yield :breadcrumbs
     #messages
+      - flash.each do |type, message|
+        - unless type.eql?('timedout')
+          %text-box{ class: type }= message
     - if content_for? :left
-      #left.sm-hidden= yield :left
+      .sm-hidden#left= yield :left
     %section#content= yield
     - if content_for? :right
-      #right.sm-hidden= yield :right
+      .sm-hidden#right= yield :right
     %footer#footer &copy;#{Date.today.year} - Francis Schiavo

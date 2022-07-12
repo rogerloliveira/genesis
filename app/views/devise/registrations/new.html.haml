@@ -1,0 +1,22 @@
+= content_for :title, (t'.sign_up')
+
+.container.grid.grid-3
+  .column-2
+    %h2.mb-6= t('.sign_up')
+    = form_for resource, as: resource_name, url: registration_path(resource_name), html: {class: 'grid gap-2'} do |f|
+      = render "devise/shared/error_messages", resource: resource
+      .col-12.field
+        = f.label :email
+        = f.email_field :email, autofocus: true, autocomplete: "email"
+      .col-12.field
+        = f.label :password
+        - if @minimum_password_length
+          %small= t'.minimum_password_length', count: @minimum_password_length
+        = f.password_field :password, autocomplete: "new-password"
+      .col-12.field
+        = f.label :password_confirmation
+        = f.password_field :password_confirmation, autocomplete: "new-password"
+      .col-12.mt-4
+        = f.submit t('.sign_up')
+        = link_to t(:back), _back_url, class: 'button'
+    = render "devise/shared/links"

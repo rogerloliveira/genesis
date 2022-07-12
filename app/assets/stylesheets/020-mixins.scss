@@ -101,45 +101,45 @@ $side-variants: ("" "", b "-bottom", t "-top", r "-right", l "-left");
   }
 }
 
-@mixin size-variants($property, $alias, $factor, $sides: false, $responsive: false, $include-base-class: false, $extras: "") {
+@mixin size-variants($property, $alias, $factor, $sides: false, $responsive: false, $include-base-class: false, $extras: "", $selector-prefix: "") {
   @for $multiplier from 1 through 16 {
     @if $responsive {
       @include responsive-breakpoints($include-base-class: $include-base-class) using ($prefix) {
         @if $sides {
           @each $suffix, $modifier in $side-variants {
-            .#{$prefix}#{$alias}#{$suffix}-#{$multiplier} {
+            #{$selector-prefix}.#{$prefix}#{$alias}#{$suffix}-#{$multiplier} {
               #{$property}#{$modifier}: $multiplier * $factor #{$extras} !important;
             }
           }
-          .#{$prefix}#{$alias}h-#{$multiplier} {
+          #{$selector-prefix}.#{$prefix}#{$alias}h-#{$multiplier} {
             #{$property}-left: $multiplier * $factor #{$extras} !important;
             #{$property}-right: $multiplier * $factor #{$extras} !important;
           }
-          .#{$prefix}#{$alias}v-#{$multiplier} {
+          #{$selector-prefix}.#{$prefix}#{$alias}v-#{$multiplier} {
             #{$property}-top: $multiplier * $factor #{$extras} !important;
             #{$property}-bottom: $multiplier * $factor #{$extras} !important;
           }
         } @else {
-          .#{$prefix}#{$alias}-#{$multiplier} { $property: $multiplier * $factor #{$extras} !important; }
+          #{$selector-prefix}.#{$prefix}#{$alias}-#{$multiplier} { $property: $multiplier * $factor #{$extras} !important; }
         }
       }
     } @else {
       @if $sides {
         @each $suffix, $modifier in $side-variants {
-          .#{$alias}#{$suffix}-#{$multiplier} {
+          #{$selector-prefix}.#{$alias}#{$suffix}-#{$multiplier} {
             #{$property}#{$modifier}: $multiplier * $factor #{$extras} !important;
           }
         }
-        .#{$alias}h-#{$multiplier} {
+        #{$selector-prefix}.#{$alias}h-#{$multiplier} {
           #{$property}-left: $multiplier * $factor #{$extras} !important;
           #{$property}-right: $multiplier * $factor #{$extras} !important;
         }
-        .#{$alias}v-#{$multiplier} {
+        #{$selector-prefix}.#{$alias}v-#{$multiplier} {
           #{$property}-top: $multiplier * $factor #{$extras} !important;
           #{$property}-bottom: $multiplier * $factor #{$extras} !important;
         }
       } @else {
-        .#{$alias}-#{$multiplier} { $property: $multiplier * $factor #{$extras} !important; }
+        #{$selector-prefix}.#{$alias}-#{$multiplier} { #{$property}: $multiplier * $factor #{$extras} !important; }
       }
     }
   }

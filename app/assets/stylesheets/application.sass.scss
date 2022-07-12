@@ -1,3 +1,13 @@
 // Entry point for your Sass build
 
-@use "genesis";
+@use "genesis" with (
+$background: #2c0408,
+$foreground: #c9c9c9,
+$header-background: #160204,
+$main-menu-background: #160204,
+$main-menu-hover-background: darken(#160204, .5),
+$header-foreground: #c9c9c9,
+$highlight: #dcac0b,
+$footer-background: #160204,
+$footer-foreground: #c9c9c9
+);

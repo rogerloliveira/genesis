@@ -24,7 +24,7 @@ form {
   i {
     grid-area: error;
     white-space: nowrap;
-    color: config.$danger;
+    color: config.$input-text-error;
   }
 
   &.hidden {
@@ -47,35 +47,39 @@ form {
   }
 }
 
-.form-input {
+%form-input {
+  /* RESET */
+  filter: none;
+  outline: none;
+
   grid-area: input;
   background: config.$input-background;
+  color: config.$input-foreground;
   border: none;
-  border-bottom: config.$input-border-color 2px solid;
+  border-bottom: config.$input-border-color config.$input-border-bottom-width solid;
   padding: .25rem;
   font-size: 14pt;
-  color: config.$foreground;
+
+  &:focus,  {
+    border-bottom-color: config.$input-border-color-focus;
+    transition: border-bottom-color ease-in 0.1s;
+
+    &.error {
+      border-bottom-color: config.$input-border-color-error;
+    }
+  }
 
   &.error {
     background: config.$input-background-color-error;
   }
-
-  &:focus {
-    border-bottom: config.$input-border-focus 2px solid;
-    transition: border-bottom-color ease-in 0.1s;
-
-    &.error {
-      border-bottom: config.$danger 2px solid;
-    }
-  }
 }
 
 input {
-  @extend .form-input;
+  @extend %form-input;
 }
 
 select {
-  @extend .form-input;
+  @extend %form-input;
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -90,7 +94,7 @@ label[data-required] {
 }
 
 textarea {
-  @extend .form-input;
+  @extend %form-input;
   resize: vertical;
 }
 

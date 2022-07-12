@@ -1,0 +1,14 @@
+= content_for :title, (t'.resend_confirmation_instructions')
+
+.container.grid.grid-3
+  .column-2
+    %h2.mb-6=t '.resend_confirmation_instructions'
+    = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post, class: 'grid gap-2' }) do |f|
+      = render "devise/shared/error_messages", resource: resource
+      .col-12.field
+        = f.label :email
+        = f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email)
+      .col-12.mt-4
+        = f.submit t('.resend_confirmation_instructions')
+        = link_to t(:back), _back_url, class: 'button'
+    = render "devise/shared/links"

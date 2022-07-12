@@ -1,0 +1,33 @@
+stages:
+  - test
+  - build
+
+test:
+  when: always
+  image: ruby:3.0.2
+  stage: test
+  tags:
+    - docker
+  before_script:
+    - gem install rubocop
+    - gem install rubocop-rails
+  script:
+    - rubocop
+
+build:
+  when: on_success
+  image: docker:19.03.12
+  stage: build
+  tags:
+    - docker
+  services:
+    - name: docker:19.03.12-dind
+      alias: docker
+  variables:
+    IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - docker build -t $IMAGE_TAG -t $CI_REGISTRY_IMAGE:latest -f build.Dockerfile .
+    - docker push $IMAGE_TAG
+    - docker push $CI_REGISTRY_IMAGE:latest

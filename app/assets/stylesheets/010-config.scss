@@ -5,16 +5,16 @@ $responsive-lg-breakpoint: 1200px !default;
 $content-width: 1200px;
 
 /* Colors */
-$white: #fff;
-$primary: #007bff;
-$secondary: #999999;
-$success: #28a745;
-$info: #17a2b8;
-$notice: #17a2b8;
-$warning: #ffc107;
-$danger: #dc3545;
-$alert: #dc3545;
-$special: rebeccapurple;
+$white: #fff !default;
+$primary: #007bff !default;
+$secondary: #999999 !default;
+$success: #28a745 !default;
+$info: #17a2b8 !default;
+$warning: #ffc107 !default;
+$danger: #dc3545 !default;
+$special: rebeccapurple !default;
+$alert: $danger;
+$notice: $info;
 
 $theme-colors: (
   primary: ($primary, $white),
@@ -26,7 +26,7 @@ $theme-colors: (
   danger: ($danger, $white),
   alert: ($alert, $white),
   special: ($special, $white)
-);
+) !default;
 
 /* Design */
 $background: #d4d4d4 !default;
@@ -34,6 +34,7 @@ $foreground: #333333 !default;
 $highlight: #dcac0b !default;
 
 /* Layout & Design */
+$custom-layout: false !default;
 $default-padding: .5rem !default;
 $default-border-color: #999 !default;
 $default-border: solid 1px $default-border-color !default;
@@ -84,32 +85,35 @@ $footer-padding: $default-padding !default;
 
 /* Typography */
 $link-color: $highlight !default;
-$link-color-visited: darken($link-color, 10);
-$link-color-active: lighten($link-color, 10);
+$link-color-visited: darken($link-color, 10) !default;
+$link-color-active: lighten($link-color, 10) !default;
 @import url(#{$text-font-url});
 @import url(#{$icon-font-url});
 
 /* Components */
 /* Card */
-$card-background: $white;
-$card-foreground: #444;
-$card-header-background-color: #ececec;
-$card-header-foreground-color: #444;
-$card-border-color: darken($card-header-background-color, 10%);
+$card-background: $white !default;
+$card-foreground: #444 !default;
+$card-header-background-color: #ececec !default;
+$card-header-foreground-color: #444 !default;
+$card-border-color: darken($card-header-background-color, 10%) !default;
 
 /* Form Controls */
-$fieldset-border-color: lighten($background, 15);
-$input-background: lighten($background, 20);
-$input-border-color: transparent;
-$input-background-focus: lighten($background, 20);
-$input-border-focus: $background;
-$form-background-color: lighten($background, 10);
-$input-background-color: lighten($background, 20);
-$input-background-color-error: transparentize($danger, 0.5);
+$fieldset-border-color: lighten($background, 15) !default;
+$input-background: lighten($background, 20) !default;
+$input-foreground: $foreground !default;
+$input-border-bottom-width: 2px !default;
+$input-border-color: transparent !default;
+$input-background-focus: lighten($background, 20) !default;
+$input-border-color-focus: $background !default;
+$input-background-color-error: transparentize($danger, 0.5) !default;
+$input-border-color-error: $danger !default;
+$input-text-error: $danger !default;
+$form-background-color: lighten($background, 10) !default;
 
 /* Table */
-$table-stripped-odd-row-background: #6c757d;
-$table-selectable-hover-background-color: #17a2b8;
-$table-bordered-border-color: #000000;
-$table-bordered-rows-border-color: #000000;
-$table-bordered-columns-border-color: #730E15;
+$table-stripped-odd-row-background: #6c757d !default;
+$table-selectable-hover-background-color: #17a2b8 !default;
+$table-bordered-border-color: #000000 !default;
+$table-bordered-rows-border-color: #000000 !default;
+$table-bordered-columns-border-color: #730E15 !default;

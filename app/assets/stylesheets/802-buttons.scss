@@ -9,7 +9,7 @@
   line-height: 1rem;
   white-space: nowrap;
   padding: .5rem 1rem;
-  border-radius: 1rem;
+  border-radius: .25rem;
   @include mixins.background-variants(config.$theme-colors, 0, 10, 10, .2, true);
 
   &.small {

@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root to: 'special_pages#home'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  match '/404', to: 'errors#not_found', via: :all
+  match '/500', to: 'errors#server_error', via: :all
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  devise_for :users
+  root to: 'special_pages#home'
+  get 'about', to: 'special_pages#about'
 end
