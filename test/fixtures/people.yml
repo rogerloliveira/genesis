@@ -1,0 +1,57 @@
+
+one:
+  first_name: MyString
+  last_name: MyString
+  birthdate: 2022-07-21
+  document_number: MyString
+  document_kind: 1
+  rural_producer: false
+  commercial_name: MyString
+  additional_document: MyString
+  mailbox: MyString
+  municipal_inscription: MyString
+  status: 1
+  observation: MyText
+  customer: false
+  supplier: false
+  carrier: false
+  driver: false
+  employee: false
+
+two:
+  first_name: MyString
+  last_name: MyString
+  birthdate: 2022-07-21
+  document_number: MyString
+  document_kind: 1
+  rural_producer: false
+  commercial_name: MyString
+  additional_document: MyString
+  mailbox: MyString
+  municipal_inscription: MyString
+  status: 1
+  observation: MyText
+  customer: false
+  supplier: false
+  carrier: false
+  driver: false
+  employee: false
+
+deletable:
+  first_name: MyString
+  last_name: MyString
+  birthdate: 2022-07-21
+  document_number: MyString
+  document_kind: 1
+  rural_producer: false
+  commercial_name: MyString
+  additional_document: MyString
+  mailbox: MyString
+  municipal_inscription: MyString
+  status: 1
+  observation: MyText
+  customer: false
+  supplier: false
+  carrier: false
+  driver: false
+  employee: false

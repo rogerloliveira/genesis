@@ -51,11 +51,11 @@ gem 'bootsnap', require: false
 # gem "sassc-rails"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+gem 'image_processing', '~> 1.2'
 
 # Better views
-gem 'haml-rails', '~> 2.0.1'
 gem 'kaminari', '~> 1.2.2'
+gem 'slim-rails'
 
 # Jobs
 gem 'sidekiq'
@@ -86,8 +86,8 @@ group :development do
   gem 'foreman'
 
   # Code quality
-  gem 'haml_lint'
   gem 'rubocop-rails', '~> 2.14.2'
+  gem 'slim_lint'
 end
 
 group :test do

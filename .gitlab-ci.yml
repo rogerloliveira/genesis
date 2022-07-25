@@ -11,8 +11,10 @@ test:
   before_script:
     - gem install rubocop
     - gem install rubocop-rails
+    - gem install slim-lint
   script:
     - rubocop
+    - slim-lint app/views
 
 build:
   when: on_success

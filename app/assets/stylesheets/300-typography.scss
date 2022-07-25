@@ -1,4 +1,5 @@
 @use "010-config" as config;
+@use "020-mixins" as mixins;
 
 body {
   font-family: config.$text-font;
@@ -8,10 +9,71 @@ a, a:link {
   color: config.$link-color;
 }
 
-a:visited {
-  color: config.$link-color-visited;
+a:link.no-underscore {
+  text-decoration: none;
 }
 
 a:active {
   color: config.$link-color-active;
 }
+
+a:hover {
+  color: config.$link-color-hover;
+}
+
+ul {
+  &.responsive {
+    width: min-content;
+    display: inline-flex;
+    flex-flow: column nowrap;
+
+    li {
+      display: block;
+      white-space: nowrap;
+    }
+  }
+
+  &.links {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      display: block;
+
+      a {
+        display: inline-flex;
+        flex-flow: row nowrap;
+        align-content: center;
+
+        text-decoration: none;
+        color: config.$secondary;
+
+        i {
+          font-size: 1rem;
+          margin: 0 .5rem 0 0;
+        }
+      }
+    }
+  }
+}
+
+.bold {
+  font-weight: 700;
+}
+
+@for $i from 6 through 1 {
+  h#{$i} {
+    font-size: 4em - $i * .35em;
+  }
+}
+
+p, div, span, i, h1, h2, h3, h4, h5, h6 {
+  @include mixins.color-variants(config.$theme-colors);
+  @include mixins.outline-variants(config.$theme-colors);
+  @include mixins.background-variants(config.$theme-colors, 20, 0, 50);
+  @include mixins.responsive-breakpoints using($breakpoint) {
+    @include mixins.font-sizes($breakpoint);
+  }
+}
+

@@ -1,0 +1,6 @@
+.bb-1.p-4(id = dom_id(<%= singular_name %>))
+  = link_to <%= singular_table_name %>.<%= %w[name first_name title].intersection(attributes.map(&:name)).first || 'id' %>, <%= singular_table_name %>_path(<%= singular_table_name %>), class: 'bold large-1'
+  p.mv-2.text-secondary= <%= singular_table_name %>.<%= %w[description].intersection(attributes.map(&:name)).first || 'id' %>
+  p.mv-2
+    = link_to t(:edit), edit_<%= singular_table_name %>_path(<%= singular_table_name %>), class: 'button small warning'
+    = link_to t(:delete), <%= singular_table_name %>_path(<%= singular_table_name %>), data: { 'turbo-method': :delete }, class: 'button small danger ml-2'

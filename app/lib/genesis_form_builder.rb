@@ -30,9 +30,14 @@ class GenesisFormBuilder < ActionView::Helpers::FormBuilder
     @template.text_field(@object_name, method, objectify_options(options.merge(type: :date)))
   end
 
-  def boolean_field(method, options = {})
-    toggle_box = hidden_field(method, options)
-    toggle_box + @template.content_tag(:'toggle-box', nil, data: { input: "#{@object_name}_#{method}" })
+  def switch_field(method, options = {})
+    @template.content_tag(:div, class: 'switch-toggle') do
+      toggle_box = check_box(method, { checked: @object.send(method) }.merge(options))
+      opts = options.merge(for: "#{@object_name}_#{method}")
+      opts[:style] = "--on-icon: '#{options[:'data-on-icon']}';" if options.key? :'data-on-icon'
+      opts[:style] += "--off-icon: '#{options[:'data-off-icon']}';" if options.key? :'data-off-icon'
+      toggle_box + @template.content_tag(:label, nil, opts)
+    end
   end
 
   private
@@ -43,6 +48,7 @@ class GenesisFormBuilder < ActionView::Helpers::FormBuilder
 
       options[:required] = true if validator.is_a? ActiveRecord::Validations::PresenceValidator
       options[:maxlength] = validator.options[:maximum] if validator.is_a? ActiveRecord::Validations::LengthValidator
+      options[:size] = nil
       set_numericality_options(validator, options) if validator.is_a? ActiveModel::Validations::NumericalityValidator
     end
   end

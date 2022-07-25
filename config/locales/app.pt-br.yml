@@ -10,12 +10,20 @@ pt-br:
   back: Voltar
   copy: Copiar
   home: Início
+  created_successfully: "%{resource_name} criado(a)"
+  updated_successfully: "%{resource_name} atualizado(a)"
+  deleted_successfully: "%{resource_name} deletado(a)"
+  are_you_sure?: Você tem certeza?
+  ago: atrás
 
   activerecord:
     models:
       user:
         one: Usuário
         other: Usuários
+      person:
+        one: Pessoa
+        other: Pessoas
     attributes:
       default_fields: &default_fields
         created_at: Criado em
@@ -46,7 +54,6 @@ pt-br:
         unlock_token: Token de desbloqueio
         updated_at: Atualizado em
         role: Função
-
 
   views:
     pagination:

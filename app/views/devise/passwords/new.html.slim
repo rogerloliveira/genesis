@@ -1,0 +1,13 @@
+= content_for :title, t('.forgot_your_password')
+
+.container.grid.grid-3
+  .column-2
+    h2.mb-6 = t('.forgot_your_password')
+    = form_for resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: 'grid gap-2' } do |f|
+      = render 'devise/shared/error_messages', resource: resource
+      .col-12.field
+        = f.label :email
+        = f.email_field :email, autofocus: true, autocomplete: 'email'
+      .col-12.mt-4
+        = f.submit t('.send_me_reset_password_instructions')
+    = render 'devise/shared/links'

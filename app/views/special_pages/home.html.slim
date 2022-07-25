@@ -1,0 +1,23 @@
+- content_for :breadcrumbs do
+  strong Breadcrumb Test
+
+.container.grid.grid-6
+  .sm-col-6.col-2.box.danger.p-4 Column 1
+  .sm-col-6.col-1
+    = form_for root_path do |f|
+      .field
+        = f.label :select
+        = select_tag :select, options_for_select(%w[first second third])
+      .field
+        = f.label :input
+        = f.text_field :input
+      .field
+        = f.label :text_area
+        = f.text_area :text_area
+      fieldset.col-12
+        legend Checkboxes
+        - 1.upto 4 do |i|
+          .check-control
+            = label_tag i
+            = check_box_tag i, 1, true
+  .sm-col-6.col-3.box.success.p-4 Column 1

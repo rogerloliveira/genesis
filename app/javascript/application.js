@@ -1,5 +1,10 @@
 // Entry point for the build script in your package.json
 import "@hotwired/turbo-rails"
+import "trix"
+import "@rails/actiontext"
 import "./controllers"
-import "./components/toggle-button"
 import "./components/text-box"
+import "./components/shortcuts"
+import "./components/toggle-button"
+import "./components/image-uploader"
+import "./components/modal-dialog"

@@ -1,0 +1,20 @@
+- content_for :breadcrumbs do
+  strong = @people.model_name.human count: 2
+
+- content_for :actions do
+  .left = link_to t('.new'), new_person_path, class: 'button success'
+
+- if @people.count.zero?
+  .container
+    h2.ta-c = t '.title'
+    p.ta-c = t '.text'
+    p.ta-c = t '.description'
+    .ta-c.mt-4
+      = link_to "#{t(:new)} #{@people.model_name.human.downcase}", new_person_path, class: 'button success'        
+- else
+  .container.fixed-width
+    h1 = @people.model_name.human count: 2
+    text-box#info.outline-secondary( icon = 'info', persistent = true ) = t '.description'
+    - @people.each do |person|
+      = render person
+    = paginate @people

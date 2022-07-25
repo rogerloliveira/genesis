@@ -1,0 +1,20 @@
+- content_for :breadcrumbs do
+  strong = @<%= plural_table_name %>.model_name.human count: 2
+
+- content_for :actions do
+  .left = link_to t('.new'), new_<%= singular_table_name %>_path, class: 'button success'
+
+- if @<%= plural_table_name %>.count.zero?
+  .container
+    h2.ta-c = t '.title'
+    p.ta-c = t '.text'
+    p.ta-c = t '.description'
+    .ta-c.mt-4
+      = link_to "#{t(:new)} #{@<%= plural_table_name %>.model_name.human.downcase}", new_<%= singular_table_name %>_path, class: 'button success'        
+- else
+  .container.fixed-width
+    h1 = @<%= plural_table_name %>.model_name.human count: 2
+    text-box#info.outline-secondary( icon = 'info', persistent = true ) = t '.description'
+    - @<%= plural_table_name %>.each do |<%= singular_table_name %>|
+      = render <%= singular_table_name %>
+    = paginate @<%= plural_table_name %>

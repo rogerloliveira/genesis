@@ -1,0 +1,4 @@
+linters:
+  LineLength:
+    include: 'specific/directory/to/include/**/*.slim'
+    max: 200

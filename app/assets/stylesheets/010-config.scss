@@ -4,8 +4,19 @@ $responsive-sm-breakpoint: 599px !default;
 $responsive-lg-breakpoint: 1200px !default;
 $content-width: 1200px;
 
+$theme-mode: 'light' !default;
+
+@function mode-brightness($color, $factor) {
+  @if $theme-mode == 'dark' {
+    @return lighten($color, $factor);
+  } @else {
+    @return darken($color, $factor);
+  }
+}
+
 /* Colors */
-$white: #fff !default;
+$light: #eee !default;
+$dark: #343a40 !default;
 $primary: #007bff !default;
 $secondary: #999999 !default;
 $success: #28a745 !default;
@@ -16,38 +27,46 @@ $special: rebeccapurple !default;
 $alert: $danger;
 $notice: $info;
 
+@function mode-color($light: $light, $dark: $dark) {
+  @if $theme-mode == 'dark' {
+    @return $dark;
+  } @else {
+    @return $light;
+  }
+}
+
 $theme-colors: (
-  primary: ($primary, $white),
-  secondary: ($secondary, $white),
-  success: ($success, $white),
-  info: ($info, $white),
-  notice: ($notice, $white),
-  warning: ($warning, $white),
-  danger: ($danger, $white),
-  alert: ($alert, $white),
-  special: ($special, $white)
+  primary: ($primary, $light),
+  secondary: ($secondary, $light),
+  success: ($success, $light),
+  info: ($info, $dark),
+  notice: ($notice, $dark),
+  warning: ($warning, $dark),
+  danger: ($danger, $light),
+  alert: ($alert, $light),
+  special: ($special, $light)
 ) !default;
 
 /* Design */
 $background: #d4d4d4 !default;
-$foreground: #333333 !default;
+$foreground: mode-color($dark, $light) !default;
 $highlight: #dcac0b !default;
 
 /* Layout & Design */
 $custom-layout: false !default;
 $default-padding: .5rem !default;
-$default-border-color: #999 !default;
+$default-border-color: mode-brightness($background, 10%) !default;
 $default-border: solid 1px $default-border-color !default;
 $default-outline-color: $highlight !default;
 $default-outline: solid 1px $default-outline-color !default;
 
-$text-font-url: 'https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap';
+$text-font-url: 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap';
 $text-font: 'Roboto';
 $icon-font-url: 'https://fonts.googleapis.com/icon?family=Material+Icons&display=swap';
 $icon-font: 'Material Icons';
 
 $header-enable: true !default;
-$header-background: #c9c9c9 !default;
+$header-background: darken($background, 5%) !default;
 $header-foreground: $foreground !default;
 $header-border-bottom: $default-border !default;
 $header-padding: $default-padding !default;
@@ -55,8 +74,8 @@ $header-padding: $default-padding !default;
 $logo-height: 100px;
 
 $main-menu-enable: true !default;
-$main-menu-background: darken($header-background, 10) !default;
-$main-menu-hover-background: darken($header-background, 15) !default;
+$main-menu-background: $header-background !default;
+$main-menu-hover-background: $main-menu-background !default;
 $main-menu-padding: $default-padding !default;
 
 $breadcrumbs-enable: true !default;
@@ -78,13 +97,14 @@ $right-column-border-left: $default-border !default;
 $right-column-padding: $default-padding !default;
 
 $footer-enable: true !default;
-$footer-background: $background !default;
+$footer-background: darken($background, 5%) !default;
 $footer-foreground: $foreground !default;
 $footer-border-top: $default-border !default;
 $footer-padding: $default-padding !default;
 
 /* Typography */
 $link-color: $highlight !default;
+$link-color-hover: lighten($link-color, 10) !default;
 $link-color-visited: darken($link-color, 10) !default;
 $link-color-active: lighten($link-color, 10) !default;
 @import url(#{$text-font-url});
@@ -92,20 +112,20 @@ $link-color-active: lighten($link-color, 10) !default;
 
 /* Components */
 /* Card */
-$card-background: $white !default;
+$card-background: $light !default;
 $card-foreground: #444 !default;
 $card-header-background-color: #ececec !default;
 $card-header-foreground-color: #444 !default;
 $card-border-color: darken($card-header-background-color, 10%) !default;
 
 /* Form Controls */
-$fieldset-border-color: lighten($background, 15) !default;
-$input-background: lighten($background, 20) !default;
-$input-foreground: $foreground !default;
+$fieldset-border-color: $highlight !default;
+$input-background: mode-color() !default;
+$input-foreground: mode-color($dark, $light) !default;
 $input-border-bottom-width: 2px !default;
 $input-border-color: transparent !default;
 $input-background-focus: lighten($background, 20) !default;
-$input-border-color-focus: $background !default;
+$input-border-color-focus: $highlight !default;
 $input-background-color-error: transparentize($danger, 0.5) !default;
 $input-border-color-error: $danger !default;
 $input-text-error: $danger !default;
@@ -117,3 +137,12 @@ $table-selectable-hover-background-color: #17a2b8 !default;
 $table-bordered-border-color: #000000 !default;
 $table-bordered-rows-border-color: #000000 !default;
 $table-bordered-columns-border-color: #730E15 !default;
+
+$toggle-box-border-color: $input-border-color;
+$toggle-box-background-color: $background;
+$toggle-box-border-color-yes: lighten($success, 30);
+$toggle-box-border-color-no: lighten($dark, 50);
+$toggle-box-button-color-yes: $success;
+$toggle-box-button-background-color-yes: lighten($success, 40);
+$toggle-box-button-color-no: $danger;
+$toggle-box-button-background-color-no: lighten($danger, 40);

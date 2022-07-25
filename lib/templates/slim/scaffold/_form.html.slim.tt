@@ -1,0 +1,10 @@
+= form_with model: <%= singular_table_name %>, html: { class: 'grid gap-2' } do |f|
+  = render 'layouts/form-errors', instance: @<%= singular_table_name %>
+<% for attribute in attributes -%>
+  .field.col-6.sm-col-12
+    = f.label :<%= attribute.name %>
+    = f.<%= attribute.field_type %> :<%= attribute.name %>
+<% end -%>
+  .actions
+    button.success( type = :submit )=t :save
+    = link_to t(:back), _back_url, class: 'button'

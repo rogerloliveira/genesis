@@ -2,14 +2,13 @@
 @use "020-mixins" as mixins;
 
 .container {
-  margin: auto;
-
   &.fluid {
     width: 100%;
   }
 
   &.fixed-width {
     width: config.$content-width;
+    margin: auto;
   }
 
   &.grid {
@@ -27,6 +26,10 @@
     }
     @include mixins.property-range(grid-column, column, 1, 12, true, true) using($i) {
       grid-column: $i;
+    }
+
+    @include mixins.property-range(grid-row, row, 1, 12, true, true) using($i) {
+      grid-column: span $i;
     }
 
     @include mixins.size-variants(grid-gap, gap, .25rem, false, false, true, $selector-prefix: "&");
@@ -97,10 +100,32 @@
   }
 }
 
-@include mixins.for-phones-only {
-  .container.centered {
-    .content {
+@include mixins.for-tablets-up {
+  .container {
+
+    &.fixed-width {
       width: 100%;
+    }
+
+    .centered {
+      .content {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@include mixins.for-phones-only {
+  .container {
+
+    &.fixed-width {
+      width: 100%;
+    }
+
+    .centered {
+      .content {
+        width: 100%;
+      }
     }
   }
 }

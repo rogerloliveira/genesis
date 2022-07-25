@@ -3,12 +3,13 @@
 
 form {
   @extend .container;
+  padding: config.$default-padding;
 }
 
 .field {
   display: grid;
   grid-template-columns: min-content 1fr min-content;
-  grid-template-rows: min-content min-content min-content;
+  grid-template-rows: min-content 2.5em min-content;
   grid-template-areas: "label label label" "input input input" "details . error";
   grid-gap: .25rem;
 
@@ -30,6 +31,28 @@ form {
   &.hidden {
     display: none;
   }
+
+  &.fluid-height {
+    grid-template-rows: min-content 1fr min-content;
+  }
+
+  &.rich-text {
+    grid-template-rows: min-content min-content 1fr min-content;
+    grid-template-areas: "label label label" "toolbar toolbar toolbar" "input input input" "details . error";
+
+    trix-toolbar {
+      grid-area: toolbar;
+
+      button {
+        background: config.$light;
+      }
+    }
+
+    trix-editor {
+      grid-area: input;
+      background: config.$input-background;
+    }
+  }
 }
 
 .check-control {
@@ -38,8 +61,13 @@ form {
   grid-template-rows: 1.5em 2fr;
   grid-template-areas: ". ." "input label";
 
-  label { grid-area: label }
-  input { grid-area: input; }
+  label {
+    grid-area: label
+  }
+
+  input {
+    grid-area: input;
+  }
 
   &.inline {
     grid-template-rows: 2fr;
@@ -60,7 +88,7 @@ form {
   padding: .25rem;
   font-size: 14pt;
 
-  &:focus,  {
+  &:focus, {
     border-bottom-color: config.$input-border-color-focus;
     transition: border-bottom-color ease-in 0.1s;
 
@@ -83,7 +111,7 @@ select {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  background: url('data:image/svg+xml;plain,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" fill="rgba(0,0,0,.8)"/></svg>') right center no-repeat;
+  background: config.$input-background url('data:image/svg+xml;plain,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" fill="rgba(0,0,0,.8)"/></svg>') right center no-repeat;
 }
 
 label[data-required] {

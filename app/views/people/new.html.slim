@@ -1,0 +1,8 @@
+- content_for :breadcrumbs do
+  = link_to (@person.model_name.human count: 2), people_path, class: 'no-underscore'
+  |  / 
+  strong = t(:new)
+
+.container.fixed-width
+  h1= "#{t(:new)} #{@person.model_name.human.downcase}"
+  = render 'form', person: @person

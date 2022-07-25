@@ -1,0 +1,43 @@
+- content_for :breadcrumbs do
+  = link_to (@person.model_name.human count: 2), people_path, class: 'no-underscore'
+  |  / 
+  strong = @person.first_name
+
+- content_for :actions do
+  .left
+    = link_to t(:edit), edit_person_path(@person), class: 'button primary', shortcut: 'F2'
+    = link_to t(:new), new_person_path, class: 'button success responsive', shortcut: 'Insert'
+
+.container.fixed-width
+  h1 #{@person.first_name} #{@person.last_name}
+
+  p
+    strong #{@person.human_attribute_name(:document_kind)}: 
+    = @person.translated_enum_value(:document_kind)
+
+  p
+    strong #{@person.human_attribute_name(:rural_producer)}: 
+    = boolean_display_span @person.rural_producer
+
+  p
+    strong #{@person.human_attribute_name(:customer)}: 
+    = boolean_display_span @person.customer
+
+  p
+    strong #{@person.human_attribute_name(:supplier)}: 
+    = boolean_display_span @person.supplier
+
+  p
+    strong #{@person.human_attribute_name(:carrier)}: 
+    = boolean_display_span @person.carrier
+
+  p
+    strong #{@person.human_attribute_name(:driver)}: 
+    = boolean_display_span @person.driver
+
+  p
+    strong #{@person.human_attribute_name(:employee)}: 
+    = boolean_display_span @person.employee
+  
+  
+    

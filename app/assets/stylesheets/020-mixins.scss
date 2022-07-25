@@ -181,13 +181,13 @@ $side-variants: ("" "", b "-bottom", t "-top", r "-right", l "-left");
 
 @mixin font-sizes($breakpoint) {
   @for $i from 1 through 3 {
-    .small#{$breakpoint}-#{$i} {
+    .#{$breakpoint}small-#{$i} {
       font-size: 1rem - ($i * .25rem);
     }
   }
 
   @for $i from 1 through 12 {
-    .large#{$breakpoint}-#{$i} {
+    .#{$breakpoint}large-#{$i} {
       font-size: 1rem + ($i * .25rem);
     }
   }
@@ -198,4 +198,21 @@ $side-variants: ("" "", b "-bottom", t "-top", r "-right", l "-left");
   background: linear-gradient(0, lighten($background-color, 20), $background-color $gradient-breakpoint, lighten($background-color, 20));
   border-bottom: 1px solid $background-color;
   color: $color;
+}
+
+@mixin outline-variants($color-map, $hover: 0, $border: -10) {
+  background: transparent;
+  @each $name, $colors in $color-map {
+    &.outline-#{$name} {
+      $color: nth($colors, 1);
+      color: $color;
+      border: adjust-color($color, $lightness: $border) 1px solid;
+      @if $hover != 0 {
+        &:hover {
+          background: adjust-color($color, $lightness: $hover);
+          color: nth($colors, 2);
+        }
+      }
+    }
+  }
 }

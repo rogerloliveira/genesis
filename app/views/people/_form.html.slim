@@ -1,0 +1,57 @@
+= form_with model: person, html: { class: 'grid gap-2' } do |f|
+  = render 'layouts/form-errors', instance: @person
+  .field.col-6.sm-col-12
+    = f.label :first_name
+    = f.text_field :first_name
+  .field.col-6.sm-col-12
+    = f.label :last_name
+    = f.text_field :last_name
+  .field.col-6.sm-col-12
+    = f.label :document_kind
+    = f.enum_field :document_kind
+  .field.col-6.sm-col-12
+    = f.label :document_number
+    = f.text_field :document_number
+  .field.col-6.sm-col-12
+    = f.label :birthdate
+    = f.date_field :birthdate
+  .field.col-6.sm-col-12
+    = f.label :rural_producer
+    = f.switch_field :rural_producer
+  .field.col-6.sm-col-12
+    = f.label :commercial_name
+    = f.text_field :commercial_name
+  .field.col-6.sm-col-12
+    = f.label :additional_document
+    = f.text_field :additional_document
+  .field.col-6.sm-col-12
+    = f.label :mailbox
+    = f.text_field :mailbox
+  .field.col-6.sm-col-12
+    = f.label :municipal_inscription
+    = f.text_field :municipal_inscription
+  .field.col-6.sm-col-12
+    = f.label :status
+    = f.enum_field :status
+  .field.col-1.sm-col-4
+    = f.label :customer
+    = f.switch_field :customer
+  .field.col-1.sm-col-12
+    = f.label :supplier
+    = f.switch_field :supplier
+  .field.col-1.sm-col-12
+    = f.label :carrier
+    = f.switch_field :carrier
+  .field.col-1.sm-col-12
+    = f.label :driver
+    = f.switch_field :driver
+  .field.col-1.sm-col-12
+    = f.label :employee
+    = f.switch_field :employee
+  .field.col-12.sm-col-12.fluid-height
+    = f.label :observation
+    = f.text_area :observation, rows: 3
+
+  .actions
+    button.success( type = :submit )= t :save
+    = link_to t(:back), _back_url, class: 'button'

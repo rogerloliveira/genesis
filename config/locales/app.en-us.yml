@@ -10,12 +10,21 @@ en-us:
   back: Back
   copy: Copy
   home: Home
+  created_successfully: "%{resource_name} created"
+  updated_successfully: "%{resource_name} updated"
+  deleted_successfully: "%{resource_name} destroyed"
+  admin_privileges_required: This resource requires admin rights
+  are_you_sure?: Are you sure?
+  ago: ago
 
   activerecord:
     models:
       user:
         one: User
         other: Users
+      person:
+        one: Person
+        other: People
     attributes:
       default_fields: &default_fields
         created_at: Created at
@@ -45,7 +54,17 @@ en-us:
         unlock_token: Unlock token
         updated_at: Updated at
         role: Role
-
+      person:
+        <<: *default_fields
+        document_kind: Document kind
+        document_kinds:
+          cpf: CPF
+          cnpj: CNPJ
+          external: EXTERNAL
+        status: Status
+        statuses: 
+          active: Active
+          blocked: Blocked
   views:
     pagination:
       last: '>>'

@@ -4,6 +4,8 @@
 body {
   background: config.$background;
   color: config.$foreground;
+  --default-off-icon: 'cancel';
+  --default-on-icon: 'check_circle';
 }
 
 @if config.$header-enable {

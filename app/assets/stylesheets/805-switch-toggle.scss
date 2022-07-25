@@ -1,0 +1,43 @@
+@use "010-config" as config;
+@use "300-typography" as typography;
+
+.switch-toggle {
+  grid-area: input;
+
+  input {
+    display: none;
+  }
+
+  label {
+    position: relative;
+    display: inline-block;
+    @extend .bold;
+    width: 4.5em;
+    height: 2.5em;
+    margin: 0;
+    cursor: pointer;
+    border: config.$default-border-color 1px solid;
+  }
+}
+
+.switch-toggle label::before {
+  font-family: config.$icon-font;
+  font-size: 1.2em;
+  position: absolute;
+  content: var(--off-icon, var(--default-off-icon));
+  text-align: center;
+  line-height: 2rem;
+  top: calc(.25rem - 1px);
+  left: calc(.25rem - 1px);
+  width: 2rem;
+  height: 2rem;
+  background-color: config.$danger;
+  transition: .3s ease-in-out;
+}
+
+.switch-toggle input[type="checkbox"]:checked + label::before {
+  content: var(--on-icon, var(--default-on-icon));
+  left: 50%;
+  color: #fff;
+  background-color: config.$success;
+}

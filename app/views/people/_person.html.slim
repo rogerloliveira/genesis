@@ -1,0 +1,6 @@
+.bb-1.p-4(id = dom_id(person))
+  = link_to person.first_name, person_path(person), class: 'bold large-1'
+  p.mv-2.text-secondary= person.id
+  p.mv-2
+    = link_to t(:edit), edit_person_path(person), class: 'button small warning'
+    = link_to t(:delete), person_path(person), data: { 'turbo-method': :delete }, class: 'button small danger ml-2'

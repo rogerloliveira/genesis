@@ -1,0 +1,3 @@
+- if instance.errors.any?
+  - instance.errors.each do |error|
+    text-box.col-12.danger( icon = 'warning' )= "#{error.attribute} #{error.message}"
