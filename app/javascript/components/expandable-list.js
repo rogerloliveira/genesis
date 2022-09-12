@@ -31,6 +31,7 @@ class ExpandableList extends HTMLElement {
 </div>
 `;
   }
+
   connectedCallback() {
     this.label = this.shadowRoot.getElementById('label');
     this.label.innerText = this.getAttribute('caption');
@@ -49,6 +50,7 @@ class ExpandableItem extends HTMLElement {
     display: block;
     padding: .5rem;
     font-weight: bold;
+    cursor: pointer;
   }
 </style>
 <span id="label"></span>
@@ -63,11 +65,17 @@ class ExpandableItem extends HTMLElement {
     this.label.innerText = this.getAttribute('caption');
     this.label.addEventListener('click', this.toggle.bind(this));
     this.area = this.shadowRoot.getElementById('area');
-    this.expanded = false;
+    this.expanded = this.hasAttribute('expanded') || this.parentNode.hasAttribute('expanded');
   }
 
   set expanded(value) {
     this._expanded = value;
+    if (value) {
+      this.setAttribute('expanded', 'expanded');
+    } else {
+      this.removeAttribute('expanded');
+    }
+
     this.area.style.display = this._expanded ? 'block' : 'none';
   }
 

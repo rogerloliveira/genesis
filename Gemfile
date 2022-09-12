@@ -81,10 +81,6 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 
-  # Utilities
-  gem 'erb2haml'
-  gem 'foreman'
-
   # Code quality
   gem 'rubocop-rails'
   gem 'slim_lint'
