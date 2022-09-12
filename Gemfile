@@ -6,16 +6,16 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.1.2'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem 'rails', '~> 7.0.2', '>= 7.0.2.4'
+gem 'rails'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem 'sprockets-rails'
 
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 1.1'
+gem 'pg'
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem 'puma', '~> 5.0'
+gem 'puma'
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
 gem 'jsbundling-rails'
@@ -33,7 +33,7 @@ gem 'cssbundling-rails'
 gem 'jbuilder'
 
 # Use Redis adapter to run Action Cable in production
-gem 'redis', '~> 4.0'
+gem 'redis'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -51,10 +51,10 @@ gem 'bootsnap', require: false
 # gem "sassc-rails"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-gem 'image_processing', '~> 1.2'
+gem 'image_processing'
 
 # Better views
-gem 'kaminari', '~> 1.2.2'
+gem 'kaminari'
 gem 'slim-rails'
 
 # Jobs
@@ -68,7 +68,7 @@ group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]
 
   # Dotenv
-  gem 'dotenv-rails', '~> 2.7.6'
+  gem 'dotenv-rails'
 end
 
 group :development do
@@ -86,7 +86,7 @@ group :development do
   gem 'foreman'
 
   # Code quality
-  gem 'rubocop-rails', '~> 2.14.2'
+  gem 'rubocop-rails'
   gem 'slim_lint'
 end
 
@@ -97,5 +97,5 @@ group :test do
   gem 'webdrivers'
 
   # Code coverage
-  gem 'simplecov', '~> 0.21.2'
+  gem 'simplecov'
 end
