@@ -1,11 +1,85 @@
 @use "010-config" as config;
 @use "020-mixins" as mixins;
+@use "802-buttons" as buttons;
 
 toggle-button[icon]:before {
   content: attr(icon);
   font-family: config.$icon-font;
 }
 
+toggle-button[mode="copy"] {
+  cursor: pointer;
+}
+
+toggle-button {
+  @extend %button-appearance;
+}
+
 text-box {
   @include mixins.background-variants(config.$theme-colors, 0, 0, 10, 0.2);
+}
+
+expandable-item {
+  display: block;
+
+  ul {
+    margin: 0;
+  }
+
+  li a.active {
+    @extend .bold;
+
+    &::before {
+      content: '> ';
+    }
+
+    &::after {
+      content: ' <';
+    }
+  }
+}
+
+expandable-area {
+  display: none;
+}
+
+#loading {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  background-color: transparentize(config.$background, .4);
+  font-size: 4em;
+}
+
+/* STATUS - empty, dragging, ready, error, loading */
+image-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 10em;
+  width: available;
+  padding: .25em;
+  border: 2px dashed config.$highlight;
+  font-weight: bold;
+  font-size: 1.5em;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+image-preview:hover {
+  color: config.$highlight;
+}
+
+image-preview[status='dragging'] {
+  background-color: transparentize(config.$success, 0.9);
+  border: 2px solid config.$highlight;
+}
+
+image-preview[status='ready'] {
+  border: 2px solid config.$highlight;
 }

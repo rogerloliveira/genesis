@@ -1,7 +1,7 @@
 class ToggleButton extends HTMLElement {
   constructor() {
     super();
-    const shadowRoot = this.attachShadow( { mode: 'open' });
+    const shadowRoot = this.attachShadow({mode: 'open'});
     shadowRoot.innerHTML = '<slot></slot>';
   }
 
@@ -25,16 +25,22 @@ class ToggleButton extends HTMLElement {
 
   render() {
     if (this.state) {
-      this.classList.add(this.pressedClass);
-      this.target().classList.remove(this.hiddenClass);
+      this.target().classList.remove(this.hiddenClass)
+      this.target().classList.add(this.visibleClass)
     } else {
-      this.classList.remove(this.pressedClass);
-      this.target().classList.add(this.hiddenClass);
+      this.target().classList.remove(this.visibleClass)
+      this.target().classList.add(this.hiddenClass)
     }
   }
 
-  copy() {
-    navigator.clipboard.writeText(this.target().innerText);
+  copy () {
+    const target = this.target()
+
+    if (typeof target.value !== 'undefined') {
+      navigator.clipboard.writeText(target.value)
+    } else {
+      navigator.clipboard.writeText(target.innerText)
+    }
   }
 
   toggle() {
@@ -55,12 +61,13 @@ class ToggleButton extends HTMLElement {
     this.render();
   }
 
-  get pressedClass() {
-    return this.getAttribute('pressed-class');
+  get visibleClass() {
+    return this.getAttribute('visible-class');
   }
 
   get hiddenClass() {
     return this.getAttribute('hidden-class');
   }
 }
+
 customElements.define('toggle-button', ToggleButton);

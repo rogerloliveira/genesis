@@ -70,3 +70,5 @@ pt-br:
   layouts:
     navigation:
       edit_account: Editar conta
+    application:
+      loading: Carregando...

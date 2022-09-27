@@ -80,3 +80,5 @@ en-us:
   layouts:
     navigation:
       edit_account: Edit account
+    application:
+      loading: Loading...

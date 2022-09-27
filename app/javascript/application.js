@@ -1,5 +1,7 @@
 // Entry point for the build script in your package.json
 import "@hotwired/turbo-rails"
+import "./_rails-ujs-alternative"
+import "./utils"
 import "trix"
 import "@rails/actiontext"
 import "./controllers"

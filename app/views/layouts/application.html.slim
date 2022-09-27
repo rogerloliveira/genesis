@@ -9,32 +9,26 @@ html
     = javascript_include_tag 'application', 'data-turbo-track': 'reload', defer: true
   body
     header#header
-      - if content_for? :left
-        toggle-button.md-hidden#btn-left(target = 'left' mode = :toggle hidden-class = 'sm-hidden' icon = :menu)
-      = link_to root_url do
-        = image_tag 'logo.svg', id: :logo
-      - if content_for? :right
-        toggle-button.md-hidden#btn-right(target = 'right' mode = :toggle hidden-class = 'sm-hidden' icon = :menu)
-      nav#main-menu
+      toggle-button#btn-menu.md-hidden.lg-hidden(type='toggle' data-icon="menu" target="main-menu" visible-class="-" hidden-class="sm-hidden")
+      = link_to root_url, id: :logo do
+        = image_tag 'logo.svg'
+      nav#main-menu.sm-hidden
         = render 'layouts/navigation'
       #profile
-
     - if content_for? :breadcrumbs
       nav#breadcrumbs
         = link_to t(:home), root_url, class: 'no-underscore'
-        |  / 
+        |  /
         = yield :breadcrumbs
     #messages
       - flash.each do |type, message|
         - unless type.eql?('timedout')
           text-box(class=type) = message
-    - if content_for? :left
-      .sm-hidden#left = yield :left
     section#content
       - if content_for? :actions
         #actions = yield :actions
       = yield
-    - if content_for? :right
-      .sm-hidden#right = yield :right
     footer#footer
       | &copy; #{Time.zone.today.year} - Francis Schiavo
+
+    #loading= t('.loading')
