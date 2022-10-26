@@ -1,35 +1,38 @@
 stages:
+  - code-quality
   - test
-  - build
+
+.ruby-setup:
+  image: ruby:3.1.2-slim
+  cache:
+    - key:
+        files:
+          - Gemfile.lock
+      paths:
+        - $GEM_CACHE
+  before_script:
+    - bundle install
+
+rubocop:
+  stage: code-quality
+  when: always
+  extends:
+    - .ruby-setup
+  script:
+    - bundle exec rubocop
+
+slim-lint:
+  stage: code-quality
+  when: always
+  extends:
+    - .ruby-setup
+  script:
+    - bundle exec slim-lint app/views
 
 test:
-  when: always
-  image: ruby:3.0.2
   stage: test
-  tags:
-    - docker
-  before_script:
-    - gem install rubocop
-    - gem install rubocop-rails
-    - gem install slim-lint
-  script:
-    - rubocop
-    - slim-lint app/views
-
-build:
   when: on_success
-  image: docker:19.03.12
-  stage: build
-  tags:
-    - docker
-  services:
-    - name: docker:19.03.12-dind
-      alias: docker
-  variables:
-    IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
-  before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  extends:
+    - .ruby-setup
   script:
-    - docker build -t $IMAGE_TAG -t $CI_REGISTRY_IMAGE:latest -f build.Dockerfile .
-    - docker push $IMAGE_TAG
-    - docker push $CI_REGISTRY_IMAGE:latest
+    - bundle exec rails test
